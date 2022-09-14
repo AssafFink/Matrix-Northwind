@@ -1,0 +1,32 @@
+<div>
+
+    <h2>Add Product</h2>
+
+    <form (ngSubmit)="send()" #productForm="ngForm">
+
+        <label>Name: </label>
+        <input type="text" name="prodName" [(ngModel)]="product.name" required minlength="2" maxlength="100" #nameControl="ngModel" />
+        <span *ngIf="nameControl.errors?.['required'] && nameControl.touched">Missing name</span>
+        <span *ngIf="nameControl.errors?.['minlength'] && nameControl.touched">Name too short</span>
+        <span *ngIf="nameControl.errors?.['maxlength'] && nameControl.touched">Name too long</span>
+
+        <label>Price: </label>
+        <input type="number" name="prodPrice" [(ngModel)]="product.price" required min="0" max="1000" #priceControl="ngModel" />
+        <span *ngIf="priceControl.errors?.['required'] && priceControl.touched">Missing price</span>
+        <span *ngIf="priceControl.errors?.['min'] && priceControl.touched">Price can't be negative</span>
+        <span *ngIf="priceControl.errors?.['max'] && priceControl.touched">Price can't exceed 1000</span>
+
+        <label>Stock: </label>
+        <input type="number" name="prodStock" [(ngModel)]="product.stock" required min="0" max="1000" #stockControl="ngModel" />
+        <span *ngIf="stockControl.errors?.['required'] && stockControl.touched">Missing stock</span>
+        <span *ngIf="stockControl.errors?.['min'] && stockControl.touched">Stock can't be negative</span>
+        <span *ngIf="stockControl.errors?.['max'] && stockControl.touched">Stock can't exceed 1000</span>
+
+        <label>Image: </label>
+        <input type="file" accept="image/*" #myImage />
+
+        <button [disabled]="productForm.invalid">Add</button>
+
+    </form>
+
+</div>
